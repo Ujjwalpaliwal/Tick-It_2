@@ -1,0 +1,11 @@
+# Git backups (from converted nested repositories)
+.git_backup
+**/.git_backup/
+
+# Node modules
+node_modules/
+
+# Expo / build output directories
+.expo/
+dist/
+web-build/
