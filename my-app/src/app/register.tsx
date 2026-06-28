@@ -10,6 +10,7 @@ import { useColorScheme } from 'react-native';
 import { useRouter } from 'expo-router';
 import type { UserRole } from '@/store/types';
 import Svg, { Defs, RadialGradient, Stop, Rect } from 'react-native-svg';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { width } = Dimensions.get('window');
 
@@ -29,6 +30,7 @@ export default function RegisterScreen() {
   const theme = Colors[scheme === 'dark' ? 'dark' : 'light'];
   const router = useRouter();
   const { registerUser } = useUserStore();
+  const insets = useSafeAreaInsets();
 
   const [step, setStep] = useState(1);
   const [name, setName] = useState('');
@@ -148,13 +150,13 @@ export default function RegisterScreen() {
 
       <Pressable
         onPress={() => router.replace('/(tabs)' as any)}
-        style={[styles.closeButton, { top: Platform.OS === 'ios' ? 50 : 20 }]}
+        style={[styles.closeButton, { top: insets.top > 0 ? insets.top + 10 : 20 }]}
       >
         <Text style={[styles.closeButtonText, { color: theme.textSecondary }]}>✕ Close</Text>
       </Pressable>
 
       <ScrollView
-        contentContainerStyle={styles.scrollContainer}
+        contentContainerStyle={[styles.scrollContainer, { paddingTop: insets.top > 0 ? insets.top + Spacing.four : Spacing.nine }]}
         showsVerticalScrollIndicator={false}
       >
         {/* Step indicator dots */}

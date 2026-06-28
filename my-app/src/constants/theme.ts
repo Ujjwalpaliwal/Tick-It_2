@@ -31,6 +31,8 @@ export const Semantic = {
   accent: '#7C3AED', // Royal Violet
   accentBg: 'rgba(124, 58, 237, 0.08)',
   xp: '#EC4899', // Cyber Magenta
+  orangeRed: '#FF4F18', // Wellness orange-red accent color
+  orangeRedBg: 'rgba(255, 79, 24, 0.08)',
 } as const;
 
 // ─── Core Theme Colors ──────────────────────────────────────────

@@ -8,6 +8,7 @@ import { useUserStore } from '@/store/userStore';
 import { useColorScheme } from 'react-native';
 import { useRouter } from 'expo-router';
 import Svg, { Defs, RadialGradient, Stop, Rect } from 'react-native-svg';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const DEMO_ACCOUNTS = [
   { label: 'Founder', emoji: '👑', email: 'founder@tickit.app', password: 'founder123', color: '#8B5CF6' },
@@ -23,6 +24,7 @@ export default function LoginScreen() {
   const theme = Colors[scheme === 'dark' ? 'dark' : 'light'];
   const router = useRouter();
   const { loginUser } = useUserStore();
+  const insets = useSafeAreaInsets();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,8 +58,8 @@ export default function LoginScreen() {
     await handleLogin(account.email, account.password);
   };
 
-  const glowColor1 = scheme === 'dark' ? '#8B5CF6' : '#A78BFA';
-  const glowColor2 = scheme === 'dark' ? '#3498DB' : '#60A5FA';
+  const glowColor1 = scheme === 'dark' ? '#1E1B4B' : '#FFE4E6';
+  const glowColor2 = scheme === 'dark' ? '#0F172A' : '#E0F2FE';
 
   return (
     <KeyboardAvoidingView
@@ -67,11 +69,11 @@ export default function LoginScreen() {
       <Svg style={StyleSheet.absoluteFill} width="100%" height="100%">
         <Defs>
           <RadialGradient id="glow1" cx="20%" cy="25%" rx="55%" ry="55%">
-            <Stop offset="0%" stopColor={glowColor1} stopOpacity={scheme === 'dark' ? 0.15 : 0.1} />
+            <Stop offset="0%" stopColor={glowColor1} stopOpacity={scheme === 'dark' ? 0.35 : 0.6} />
             <Stop offset="100%" stopColor={glowColor1} stopOpacity={0} />
           </RadialGradient>
           <RadialGradient id="glow2" cx="80%" cy="75%" rx="60%" ry="60%">
-            <Stop offset="0%" stopColor={glowColor2} stopOpacity={scheme === 'dark' ? 0.12 : 0.08} />
+            <Stop offset="0%" stopColor={glowColor2} stopOpacity={scheme === 'dark' ? 0.32 : 0.5} />
             <Stop offset="100%" stopColor={glowColor2} stopOpacity={0} />
           </RadialGradient>
         </Defs>
@@ -81,13 +83,13 @@ export default function LoginScreen() {
 
       <Pressable
         onPress={() => router.replace('/(tabs)' as any)}
-        style={[styles.closeButton, { top: Platform.OS === 'ios' ? 50 : 20 }]}
+        style={[styles.closeButton, { top: insets.top > 0 ? insets.top + 10 : 20 }]}
       >
         <Text style={[styles.closeButtonText, { color: theme.textSecondary }]}>✕ Close</Text>
       </Pressable>
 
       <ScrollView
-        contentContainerStyle={styles.scrollContainer}
+        contentContainerStyle={[styles.scrollContainer, { paddingTop: insets.top > 0 ? insets.top + Spacing.four : Spacing.nine }]}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
@@ -139,7 +141,7 @@ export default function LoginScreen() {
             style={({ pressed }) => [
               styles.loginBtn, 
               { 
-                backgroundColor: Semantic.accent,
+                backgroundColor: Semantic.orangeRed,
                 opacity: pressed ? 0.9 : 1,
                 transform: [{ scale: pressed ? 0.98 : 1 }]
               }
@@ -155,8 +157,8 @@ export default function LoginScreen() {
           </Pressable>
 
           <Pressable onPress={() => router.push('/register' as any)} style={styles.registerLink}>
-            <Text style={[styles.registerLinkText, { color: Semantic.accent }]}>
-              Don't have an account? Create one
+            <Text style={[styles.registerLinkText, { color: Semantic.orangeRed }]}>
+              Don&apos;t have an account? Create one
             </Text>
           </Pressable>
 

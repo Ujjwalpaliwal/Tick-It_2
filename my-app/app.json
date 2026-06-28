@@ -38,7 +38,8 @@
             "imageWidth": 76
           }
         }
-      ]
+      ],
+      "expo-image"
     ],
     "experiments": {
       "typedRoutes": true,
@@ -47,7 +48,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "731f563a-374c-42d2-afa8-3c22ad9d853f"
+        "projectId": "266bd0b5-ce34-456f-a3f3-e23921d7d8a6"
       }
     }
   }

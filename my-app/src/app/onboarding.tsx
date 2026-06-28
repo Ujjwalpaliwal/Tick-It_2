@@ -3,6 +3,7 @@ import {
   View, Text, StyleSheet, Pressable, TextInput,
   Dimensions, ScrollView, Animated,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Colors, Typography, Radius, Spacing, Semantic } from '@/constants/theme';
 import { useUserStore } from '@/store/userStore';
 import { useColorScheme } from 'react-native';
@@ -77,7 +78,7 @@ export default function OnboardingScreen() {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]}>
       {/* Progress dots */}
       <View style={styles.dotsRow}>
         {STEPS.map((_, i) => (
@@ -196,7 +197,7 @@ export default function OnboardingScreen() {
           </Text>
         </Pressable>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
